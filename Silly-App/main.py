@@ -1,10 +1,32 @@
+"""
+Small startup helper: attempt to install dependencies listed in
+`requirements.txt` before running the app. To skip automatic installation,
+set the environment variable `SILLYAPP_SKIP_INSTALL=1`.
+"""
+import os
+import sys
+import subprocess
+
+def _install_requirements():
+    req_path = os.path.join(os.path.dirname(__file__), "requirements.txt")
+    if not os.path.exists(req_path):
+        return
+    if os.environ.get("SILLYAPP_SKIP_INSTALL"):
+        return
+    try:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", req_path])
+    except Exception as e:
+        print(f"Warning: failed to install requirements: {e}", file=sys.stderr)
+
+
+_install_requirements()
+
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 import random
 import threading
 import time
-import os
 
 WAIFU_FOLDER = os.path.join(os.path.dirname(__file__), "waifus")
 WAIFU_GIFS = [
