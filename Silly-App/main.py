@@ -10,7 +10,7 @@ WAIFU_FOLDER = os.path.join(os.path.dirname(__file__), "waifus")
 WAIFU_GIFS = [
     os.path.join(WAIFU_FOLDER, f)
     for f in os.listdir(WAIFU_FOLDER)
-    if f.lower().endswith(".gif")
+    if f.lower()
 ]
 
 GIF_DISPLAY_TIME = 3  # seconds
